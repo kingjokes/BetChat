@@ -49,7 +49,7 @@ this is to install all dependencies
 
 
 ## Demo
- The live demo link: [`BetChat`](https://https://betchatapp.herokuapp.com)
+ The live demo link: [`BetChat`](https://betchatapp.herokuapp.com)
  <br>
  For api testing, click on the following [`Api Testing`](https://betchatapp.herokuapp.com/api-docs/)
  
