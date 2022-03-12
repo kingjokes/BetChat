@@ -3,7 +3,7 @@
  <hr>
  
  <p>
-  Simple RESTful API built with Node.js, MongoDB, and Express.
+  Simple RESTful API built with Node.js, MongoDB, and Express. The API handles user registration, loggin in, token authorization and blog post posting and reading 
  </p>
  <hr>
  
