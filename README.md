@@ -12,7 +12,7 @@
 This is application can cloned directly or run the command
 
 ```sh
-$ git -clone https://github.com/siegelverse/bookListApi.git
+$ git clone https://github.com/kingjokes/BetChat.git
 ```
 
 Cloning is done using the
