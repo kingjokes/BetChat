@@ -19,7 +19,7 @@ const login = async (req,res)=>{
                 return res.send({
                     status:false,
                     message:'User not found'
-                }).status(200)
+                }).status(404)
             }
 
             //if user is found, verify password
@@ -48,6 +48,13 @@ const login = async (req,res)=>{
                    token: accessToken
                }).status(200)
            }
+
+           //if password does not match
+           return res.send({
+               status:false,
+               message:'Invalid password supplied'
+           }).status(401)
+
 
 
         }).catch(e=>console.log(e.message))

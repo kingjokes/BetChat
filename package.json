@@ -30,6 +30,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.6",
     "nodemon": "^2.0.15",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.3.0",
     "xss": "^1.0.11",
     "xss-clean": "^0.1.1"
   }
