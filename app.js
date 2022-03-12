@@ -19,21 +19,27 @@ app.use(express.urlencoded({extended:true}))
 app.use(bodyParser.json()) //parses request body as json
 app.use(bodyParser.urlencoded({ extended: true })) //allows express post & delete requests
 
+//setting up api documentation
 const swaggerOptions={
     swaggerDefinition:{
-        components:{
-            securitySchemes:{
-                type: "apiKey",
-                description: "API token to authorize requests.",
-                name: "token" ,
-                in: "header"
+        openapi: "3.0.3",
+        components: {
+            securitySchemes: {
+                jwt: {
+                    type: "http",
+                    scheme: "bearer",
+                    in: "header",
+                    bearerFormat: "JWT",
+                    description: ""
+                },
             }
+        }
+        ,
 
-        },
         // ADD THIS LINE!!!
         info:{
             title:'BetChat API',
-            description:'BetChat API Information',
+            description:'BetChat API Information. Note path with authorization requires a token passed as header in the given route ',
             version:'1.0.0',
             contact:{
                 name:'Paul Jokotagba'
@@ -43,7 +49,6 @@ const swaggerOptions={
 
     },
     apis:["app.js",'./routes/*.js'],
-    authAction :{ authentication: {name: "authentication", schema: {type: "apiKey", in: "header", name: "Authorization", description: ""}, value: "Bearer <JWT>"} }
 }
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
@@ -78,7 +83,7 @@ db.then(response=>{
  *   /user/posts:
  *     get:
  *       security:
- *         - token: []
+ *         - jwt: []
  *       summary: Gets all post by users
  *       responses:
  *         '200':    # status code
@@ -104,7 +109,7 @@ db.then(response=>{
  *     get:
  *       summary: get user details by id
  *       security:
- *         - token: []
+ *         - jwt: []
  *       parameters:
  *         - name: id
  *           in: path
@@ -142,22 +147,24 @@ db.then(response=>{
  *       summary: end point to log user in
  *       consumes:
  *         - application/json
- *       parameters:
- *         - in: body
- *           name: user
- *           description: The user to log in.
- *           schema:
- *             type: object
- *             required:
- *               - email
- *               - password
- *             properties:
- *               email:
- *                 type: string
- *                 example: pauljokotagba@gmail.com
- *               password:
- *                 type: string
- *                 example: 12345
+ *       requestBody:
+ *         x-name:  body
+ *         content:
+ *           application/json:
+ *
+ *             description: The user to log in.
+ *             schema:
+ *               type: object
+ *               required:
+ *                 - email
+ *                 - password
+ *               properties:
+ *                 email:
+ *                   type: string
+ *                   example: pauljokotagba@gmail.com
+ *                 password:
+ *                   type: string
+ *                   example: 12345
  *
  *
  *       responses:
@@ -193,45 +200,47 @@ db.then(response=>{
  *       summary: end point to register users
  *       consumes:
  *         - application/json
- *       parameters:
- *         - in: body
- *           name: userData
- *           description: The user to create.
- *           schema:
- *             type: object
- *             required:
- *               - firstname
- *               - lastname
- *               - phone
- *               - email
- *               - password
- *               - interests
+ *       requestBody:
+ *           x-name : body
+ *           content:
+ *            application/json:
  *
- *             properties:
- *               firstname:
- *                 type: string
- *                 example: John
+ *              description: The user to create.
+ *              schema:
+ *                type: object
+ *                required:
+ *                  - firstname
+ *                  - lastname
+ *                  - phone
+ *                  - email
+ *                  - password
+ *                  - interests
  *
- *               lastname:
- *                 type: string
- *                 example: Doe
+ *                properties:
+ *                  firstname:
+ *                    type: string
+ *                    example: John
  *
- *               phone:
- *                 type: string
- *                 example: +2347036292257
+ *                  lastname:
+ *                    type: string
+ *                    example: Doe
+ *
+ *                  phone:
+ *                    type: string
+ *                    example: +2347036292257
  *
  *
- *               email:
- *                 type: string
- *                 example: johndoe@gmail.com
+ *                  email:
+ *                    type: string
+ *                    example: johndoe@gmail.com
  *
- *               password:
- *                 type: string
- *                 example: 123456
+ *                  password:
+ *                    type: string
+ *                    example: 123456
  *
- *               interests:
- *                 type: string
- *                 example: Football, Sport
+ *                  interests:
+ *                    type: string
+ *                    example: Football, Sport
  *
  *
  *
@@ -253,40 +262,37 @@ db.then(response=>{
  * /user/new-post:
  *     post:
  *       security:
- *         - token: []
+ *         - jwt: []
  *
  *       summary: end point for a user to submit a blog post
  *
  *       consumes:
  *         - application/json
- *       parameters:
- *         - in: body
- *           name: blogPost
- *           description: The blog post to create.
- *           schema:
- *             type: object
- *             required:
- *               - title
- *               - body
- *               - user_id
+ *       requestBody:
+ *           x-name: body
+ *           content:
+ *             application/json:
+ *
+ *               description: The blog post to create.
+ *               schema:
+ *                 type: object
+ *                 required:
+ *                   - title
+ *                   - body
  *
  *
- *             properties:
- *               title:
- *                 type: string
- *                 example: My blog post
+ *
+ *                 properties:
+ *                   title:
+ *                     type: string
+ *                     example: My blog post
  *
  *
- *               body:
- *                 type: string
- *                 example: this is a good life for a blogger
+ *                   body:
+ *                     type: string
+ *                     example: this is a good life for a blogger
  *
- *
- *               user_id:
- *                 type: string
- *                 example: 622ca2822d11abb017ea291d
- *
- *
+
  *
  *
  *

@@ -4,8 +4,10 @@ require('dotenv').config()
 
 //token verify  middleware
 const verifyToken = async (req, res, next)=>{
-    const token = req.body.token || req.query.token || req.headers["x-access-token"];
 
+    // const token = req.body.token || req.query.token || req.headers["x-access-token"];
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
     //return if  token header  is not found
     if(!token) {
         return res.status(403).send({

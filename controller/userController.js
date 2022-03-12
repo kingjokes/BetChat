@@ -36,10 +36,7 @@ const login = async (req,res)=>{
                    {expiresIn: '2h'}
                )
 
-               //set a new header with user token
-               res.setHeader('x-access-token', accessToken)
-               //set a new cookie with user token
-               res.cookie('x-access-token', accessToken, {httpOnly: true, maxAge: 2 * 60 * 60 * 1000, sameSite: 'None'})
+
 
                //return response with user token
                return res.send({
