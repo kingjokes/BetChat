@@ -39,7 +39,7 @@ const swaggerOptions={
         // ADD THIS LINE!!!
         info:{
             title:'BetChat API',
-            description:'BetChat API Information. Note path with authorization requires a token passed as header in the given route ',
+            description:'BetChat API Information. Note path with authorization requires a token passed as header in the given route.Token can be gotten after a successful log in or account creation ',
             version:'1.0.0',
             contact:{
                 name:'Paul Jokotagba'
