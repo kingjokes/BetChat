@@ -15,7 +15,7 @@ This is application can cloned directly or run the command
 $ git clone https://github.com/kingjokes/BetChat.git
 ```
 
-Cloning is done using the
+When Cloning is done, use the
 [`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
 ```sh
@@ -32,20 +32,20 @@ this is to install all dependencies
  ```
  ## Directory setup
   * config : folder containers the following files
-    * dbConfig: mongodb setup
-    * userSchema: mongodb schema for user
-    * postSchema: mongodb blog post schema
+    * dbConfig.js: mongodb setup
+    * userSchema.js: mongodb schema for user
+    * postSchema.js: mongodb blog post schema
   * controller: folder contains the following file
-    * userController: contains all actions performed by user
+    * userController.js: contains all actions performed by user
   
   * middleware : folder containers the following files
-    * verifyUser: handles token verification on authorized routes
+    * verifyUser.js: handles token verification on authorized routes
 
   * models: folder contains the following file
-    * user: contains all database query by user
+    * user.js: contains all database query by user
  
   * routes: folder contains the following file
-    * userRoutes: contains all user routes
+    * userRoutes.js: contains all user routes
 
 
 ## Demo
